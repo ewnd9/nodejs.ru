@@ -7,6 +7,7 @@ Pull requests highly acceptable.
 ## Installation
 ```
 git clone https://github.com/brainfucker/nodejs.ru
+npm install
 ```
 
 ## Run

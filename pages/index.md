@@ -25,6 +25,7 @@ nodejs.ru написан без использования фреймворко�
 ## Установка
 ```
 git clone https://github.com/brainfucker/nodejs.ru
+npm install
 ```
 
 ## Запуск
