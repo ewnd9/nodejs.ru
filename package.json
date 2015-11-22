@@ -2,7 +2,7 @@
   "name": "nodejs.ru",
   "description": "web site code",
   "author": "Oleg Illarionov",
-  "version": "0.1.0"
+  "version": "0.1.0",
   "repository": "git://github.com/brainfucker/nodejs.ru.git",
   "homepage": "https://github.com/brainfucker/nodejs.ru",
   "bugs": { "url": "http://github.com/brainfucker/nodejs.ru/issues" },
