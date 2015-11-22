@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/all.css" rel="stylesheet">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-green">
+  <div class="container navbar-container">
+    <a class="navbar-brand" href="/">Node.js ru</a>
+    <a href="https://github.com/brainfucker/nodejs.ru" class="navbar-right-link">Github</a>
+  </div>
+</nav>
+<div class="main-nav-block">
+  <div class="container">
+    <h1>Что это?</h1>
+    <p>Вы попали на open-source сайт, который разрабатывается и поддерживается сообществом. Любой может внести вклад в развитие сайта, добавив статью или как либо улучшив сайт, для этого достаточно послать <b>pull request</b> в репозиторий сайта <a href="https://github.com/brainfucker/nodejs.ru">https://github.com/brainfucker/nodejs.ru</a></p>
+  </div>
+</div>
+<div class="main-content">
+  <div class="container">
+    {% autoescape false %}{{ content }}{% endautoescape %}
+  </div>
+</div>
+<div class="main-footer">
+  <div class="container">
+    <a href="/">Главная</a><a href="/about">Колонка автора</a>
+  </div>
+</div>
+</body>

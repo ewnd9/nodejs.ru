@@ -1,0 +1,9 @@
+{
+  "name": "nodejs.ru",
+  "description": "web site code",
+  "dependencies": {
+    "marked": "^0.3.5",
+    "swig": "1.4.2"
+  },
+  "devDependencies": {}
+}
