@@ -4,8 +4,17 @@ var path = require('path')
 var fs = require('fs')
 var swig = require('swig')
 var marked = require('marked')
-
+var config = require('./config.json')
 var FileCache = {}
+
+function log(str, color) {
+  if (color) {
+    console.log("\033[1;3"+color+"m"+str+"\033[0m")
+  } else {
+    console.log(str)
+  }
+}
+
 function fetchFileFromDisc(fullPath, callback, processFunc) {
   console.log('read from disc');
   fs.readFile(fullPath, function (err, data) {
@@ -115,6 +124,7 @@ function processRequest(filePath, res) {
 var srv = http.createServer(function(req, res) {
   var uri = url.parse(req.url)
   processRequest(uri.pathname, res)
-});
+})
 
-srv.listen(8001, '127.0.0.1');
+srv.listen(config.port, '127.0.0.1');
+log('Server has been started at port: '+config.port, 2);
