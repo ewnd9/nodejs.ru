@@ -10,7 +10,7 @@
   "tags": ["site", "nodejs.ru", "russian"],
   "license": "MIT",
   "dependencies": {
-    "marked": "^0.3.5",
+    "marked": "0.3.5",
     "swig": "1.4.2"
   },
   "devDependencies": {}
