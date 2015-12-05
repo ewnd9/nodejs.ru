@@ -74,6 +74,11 @@ function parsePage(fileName, callback) {
 function getFiles (dir, files_){
     files_ = files_ || [];
     var files = fs.readdirSync(dir);
+    
+    files.sort(function(a, b) {
+         return a<b;
+    });
+
     for (var i in files){
         var name = files[i];
         //get title from h1:
