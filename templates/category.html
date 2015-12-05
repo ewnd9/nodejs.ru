@@ -25,7 +25,15 @@
 </div>
 <div class="main-content">
   <div class="container">
-    {% autoescape false %}{{ content }}{% endautoescape %}
+    <strong> Категория: {{ category }} </strong>
+    
+
+    {% for file in files %}
+    <li>
+      <a href="{{ "/"+category+"/"+file }}">{{file}}</a>
+    </li>
+  {% endfor %}
+
   </div>
 </div>
 <div class="main-footer">

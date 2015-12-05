@@ -47,7 +47,7 @@ function fetchFileFromDisc(fullPath, callback, processFunc) {
 }
 
 function fetchFile(filePath, fromDir, callback, processFunc) {
-  var fullPath = path.resolve(__dirname, fromDir+'/'+filePath)
+  var fullPath = path.resolve(__dirname, fromDir+'/'+filePath);
   if (fullPath.indexOf(__dirname+'/'+fromDir+'/') !== 0) {
     console.log('possible hack attack, address requested: ', fullPath);
     return false;
@@ -71,8 +71,18 @@ function parsePage(fileName, callback) {
   });
 }
 
+function getFiles(dir, files_){
+    files_ = files_ || [];
+    var files = fs.readdirSync(dir);
+    for (var i in files){
+        var name = files[i];
+        files_.push(name.replace(/\.[^/.]+$/, ""));
+    }
+    return files_;
+}
+
 function processRequest(filePath, res) {
-  filePath = filePath.slice(1)
+  filePath = filePath.slice(1);
   var route = {'': 'index', 'index.html': 'index', 'index.htm': 'index'}
   if (route[filePath]) {
     filePath = route[filePath]
@@ -90,6 +100,8 @@ function processRequest(filePath, res) {
     'map': 'application/json',
   }
   var fileRes = filePath.match(/\.([a-z]+)$/)
+
+  //console.log(file)
   if (fileRes && supportedFiles[fileRes[1]]) {
     if (supportedFiles[fileRes[1]]) {
       fetchFile(filePath, 'static', function(content) {
@@ -109,15 +121,39 @@ function processRequest(filePath, res) {
       res.write("404 Unsupported type\n");
     }
   } else {
-    parseTemplate('index.html', function(index) {
+
+    
+    
+  var fullPath = __dirname+'/pages/'+filePath;
+  var layout = 'index.html';
+  var params = {title:'Nodejs.ru'};
+
+  fs.exists(fullPath, function(exists){
+    if(exists){
+      if(fs.lstatSync(fullPath).isDirectory()){
+        layout = 'category.html';
+        params.files = getFiles(fullPath);
+        params.category = filePath;
+      }
+    }
+
+    parseTemplate(layout, function(index) {
+
       parsePage(filePath+'.md', function(content) {
-        res.write(index({
-          title: 'Nodejs.ru',
-          content: content
-        }));
-        res.end();
+        params.content = content?content:'Not found';
+          res.write(index(params));
+          res.end(); 
+        })
       })
-    })
+  
+    
+  });
+            
+      
+      
+
+    
+    
   }
 }
 
