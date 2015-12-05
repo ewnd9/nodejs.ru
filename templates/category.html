@@ -30,7 +30,7 @@
 
     {% for file in files %}
     <li>
-      <a href="{{ "/"+category+"/"+file }}">{{file}}</a>
+      <a href="{{ "/"+category+"/"+file.url }}">{{file.title}}</a>
     </li>
   {% endfor %}
 

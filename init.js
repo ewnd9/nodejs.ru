@@ -71,14 +71,27 @@ function parsePage(fileName, callback) {
   });
 }
 
-function getFiles(dir, files_){
+function getFiles (dir, files_){
     files_ = files_ || [];
     var files = fs.readdirSync(dir);
     for (var i in files){
         var name = files[i];
-        files_.push(name.replace(/\.[^/.]+$/, ""));
+        //get title from h1:
+        var data = fs.readFileSync(dir+"/"+name, 'utf8');
+        var re = /#(.*)/;
+        var m;
+
+        if ((m = re.exec(data)) !== null) {
+            if (m.index === re.lastIndex) {
+                re.lastIndex++;
+            }
+        }
+          
+        files_.push({url:name.replace(/\.[^/.]+$/, ""), title:m[1].trim()});
+
     }
     return files_;
+    
 }
 
 function processRequest(filePath, res) {
@@ -101,7 +114,7 @@ function processRequest(filePath, res) {
   }
   var fileRes = filePath.match(/\.([a-z]+)$/)
 
-  //console.log(file)
+
   if (fileRes && supportedFiles[fileRes[1]]) {
     if (supportedFiles[fileRes[1]]) {
       fetchFile(filePath, 'static', function(content) {
@@ -138,21 +151,14 @@ function processRequest(filePath, res) {
     }
 
     parseTemplate(layout, function(index) {
-
       parsePage(filePath+'.md', function(content) {
         params.content = content?content:'Not found';
           res.write(index(params));
           res.end(); 
         })
       })
-  
     
   });
-            
-      
-      
-
-    
     
   }
 }
