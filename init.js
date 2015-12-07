@@ -91,8 +91,10 @@ function getFiles (dir, files_){
                 re.lastIndex++;
             }
         }
-          
-        files_.push({url:name.replace(/\.[^/.]+$/, ""), title:m[1].trim()});
+        
+        if(m){
+          files_.push({url:name.replace(/\.[^/.]+$/, ""), title:m[1].trim()});
+        }
 
     }
     return files_;
