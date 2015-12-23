@@ -1,6 +1,8 @@
 Nodejs.ru site
 =====
 
+[![Slack Status](https://rocky-badlands-5276.herokuapp.com/badge.svg)](https://rocky-badlands-5276.herokuapp.com)
+
 This is code of nodejs.ru site including engine and all pages.
 Pull requests highly acceptable.
 
